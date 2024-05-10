@@ -22,3 +22,5 @@ Linux/Mac
 ```shell
 python3 app.py
 ```
+![image](https://github.com/muslimbek77/ismlar-manosi/assets/48023644/4cd83b90-0727-4353-9050-fdbaec18ba37)
+

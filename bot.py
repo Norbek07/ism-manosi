@@ -16,7 +16,7 @@ from aiogram.fsm.context import FSMContext #new
 from states.reklama import Adverts
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 import time 
-
+from ism_manosi import ism_manosi_funksiyasi
 ADMINS = config.ADMINS
 TOKEN = config.BOT_TOKEN
 CHANNELS = config.CHANNELS
@@ -32,10 +32,19 @@ async def start_command(message:Message):
     telegram_id = message.from_user.id
     try:
         db.add_user(full_name=full_name,telegram_id=telegram_id) #foydalanuvchi bazaga qo'shildi
-        await message.answer(text="Assalomu alaykum, botimizga hush kelibsiz")
+        await message.answer(text="Assalomu alaykum, Bu bot ismingizni manosini topib beradi.\nBotdan foydalanish uchun ismingizni kiriting!")
     except:
         await message.answer(text="Assalomu alaykum")
 
+@dp.message(F.text)
+async def ismmanosi(message:Message):
+    ism = message.text
+    ism = ism.replace("'","‘")
+    manosi = ism_manosi_funksiyasi(ism=ism)
+    text = f"{ism} manosi:\n{manosi}"
+    if manosi == False:
+        text = "Afsuski topilmadi 😢"
+    await message.answer(text=text)
 
 @dp.message(IsCheckSubChannels())
 async def kanalga_obuna(message:Message):
